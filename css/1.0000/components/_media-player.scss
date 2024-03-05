@@ -1,0 +1,27 @@
+$select: ".media-player" !default;
+
+// config
+@use "../config/fonts";
+@use "../config/colors";
+@use "../config/queries";
+
+// abstracts
+@use "../../../Shared/css/template/base/abstracts/group";
+
+@mixin base {
+    #{$select} {
+        &__group {
+            @include group.contain;
+            @include group.flexchild(1 1 auto);
+            margin-top: 0.5rem;
+
+            font-size: fonts.em(20);
+        }
+
+        & &__button {
+            padding: 0.5em;
+        }
+
+        @content;
+    }
+}

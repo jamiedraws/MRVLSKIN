@@ -1,0 +1,49 @@
+@use "sass:math";
+
+// layouts
+@use "../layouts/document";
+@use "../layouts/header";
+@use "../layouts/nav";
+@use "../layouts/content";
+@use "../layouts/footer";
+@use "../layouts/faq";
+
+// components
+@use "../components/button";
+@use "../components/burst";
+@use "../../../Shared/css/template/base/components/skip-link";
+@use "../../../Shared/css/template/base/components/link";
+
+// abstracts
+@use "../abstracts/logo-text";
+@use "../../../Shared/css/template/base/abstracts/icons";
+
+// media
+@use "../../../Shared/css/template/base/media/contain";
+@use "../../../Shared/css/template/base/media/load-item";
+
+@use "../../../Shared/css/template/base/layouts/form";
+
+@mixin critical {
+    @include load-item.new($use-arp: false);
+    @include link.base;
+    @include skip-link.new;
+    @include button.base;
+    @include burst.base;
+    @include icons.new;
+    @include icons.combobox;
+    @include faq.base;
+
+    @include document.base;
+    @include logo-text.base;
+    @include header.base;
+    @include nav.base;
+    @include content.base;
+    @include content.text;
+    @include footer.base;
+}
+
+@mixin defer {
+    @include form.new;
+    @include form.fieldset;
+}

@@ -1,0 +1,36 @@
+$select: ".offer-group" !default;
+
+// config
+@use "../config/fonts";
+@use "../config/colors";
+@use "../config/queries";
+
+// abstracts
+@use "../../../Shared/css/template/base/abstracts/group";
+@use "../../../Shared/css/template/base/abstracts/divider-line";
+
+@mixin base {
+    #{$select} {
+        font-size: 0.5em;
+
+        @media all and (max-width: queries.get(document-mobile-portrait)) {
+            font-size: 1.5vw;
+        }
+
+        &__group {
+            @include group.contain;
+            justify-content: center;
+        }
+
+        &__line {
+            @include divider-line.column;
+            font-size: 1.5em;
+        }
+
+        &__order {
+            font-size: 2em;
+        }
+
+        @content;
+    }
+}

@@ -1,0 +1,39 @@
+$select: ".media-player" !default;
+
+// config
+@use "../config/fonts";
+@use "../config/colors";
+@use "../config/queries";
+
+// abstracts
+@use "../../../Shared/css/template/base/abstracts/group";
+
+@mixin base {
+    #{$select} {
+        &__group {
+            @include group.contain;
+            @include group.flexchild(1 1 auto);
+            margin-top: 0.5rem;
+
+            font-size: 0.9em;
+        }
+
+        &__button {
+            @media all and (min-width: queries.set(600)) {
+                &:nth-child(1) {
+                    flex-grow: 0;
+                    flex-basis: 8em;
+                    max-width: 8em;
+                }
+
+                &:nth-child(3) {
+                    flex-grow: 0;
+                    flex-basis: 6em;
+                    max-width: 6em;
+                }
+            }
+        }
+
+        @content;
+    }
+}

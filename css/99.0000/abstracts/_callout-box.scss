@@ -1,0 +1,53 @@
+$select: ".callout-box" !default;
+
+// config
+@use "../config/colors";
+@use "../config/fonts";
+@use "../config/queries";
+
+// themes
+@use "../../../Shared/css/template/base/themes/background";
+
+@mixin base {
+    #{$select} {
+        text-align: center;
+        font-size: 1em;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        color: colors.get(callout);
+
+        &__title {
+            font-size: 2em;
+
+            font-weight: 600;
+            background: white;
+            display: inline-block;
+            position: relative;
+            margin-bottom: 0.65em;
+        }
+
+        &__desc {
+            flex: 1 1 100%;
+        }
+
+        @media all and (min-width: queries.set(480)) {
+            &__title {
+                margin-bottom: -0.65em;
+            }
+
+            &__desc {
+                padding: 1em;
+                border: 1px solid;
+            }
+        }
+
+        @media all and (max-width: queries.set(479)) {
+            &__title {
+                line-height: 0.9;
+            }
+        }
+
+        @content;
+    }
+}

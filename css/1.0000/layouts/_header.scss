@@ -1,0 +1,48 @@
+$select: ".header" !default;
+
+// config
+@use "../config/fonts";
+@use "../config/colors";
+@use "../config/queries";
+
+// abstracts
+@use "../../../Shared/css/template/base/abstracts/group";
+
+// themes
+@use "../../../Shared/css/template/base/themes/background";
+
+@mixin base {
+    #{$select} {
+        @include background.color-map(
+            $background-color: colors.get(primary),
+            $text-color: colors.get(default-light)
+        );
+
+        &__group {
+            @include group.contain;
+            align-items: center;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        &__logo {
+            color: colors.get(logo-text);
+            font-size: 1.25em;
+        }
+
+        &__title {
+            font-size: fonts.em(29);
+            line-height: 1.2;
+            flex: 1 1 auto;
+            text-align: center;
+            color: colors.get(default-light);
+            max-width: 25em;
+        }
+
+        @media all and (max-width: queries.get(nav-max)) {
+            display: none;
+        }
+
+        @content;
+    }
+}

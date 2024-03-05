@@ -1,0 +1,34 @@
+$select: ".first-letter-text" !default;
+
+// config
+@use "../config/fonts";
+@use "../config/colors";
+@use "../config/queries";
+
+// abstracts
+@use "../../../Shared/css/template/base/abstracts/group";
+
+@mixin base {
+    #{$select} {
+        font: fonts.em(18) fonts.get(secondary);
+
+        &__group {
+            @include group.contain(0.5rem);
+        }
+
+        &__first-letter {
+            flex: 0 0 2.75em;
+
+            font-size: 2.6em;
+            font-weight: 900;
+            text-align: right;
+            line-height: 1;
+        }
+
+        &__text {
+            flex: 1;
+        }
+
+        @content;
+    }
+}

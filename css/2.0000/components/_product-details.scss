@@ -1,0 +1,29 @@
+$select: ".product-details" !default;
+
+@use "../config/colors";
+@use "../config/queries";
+@use "../config/fonts";
+
+@mixin base {
+    #{$select} {
+        
+        background: colors.get(accent-background);
+        font-family: fonts.get(secondary);
+
+        h3,
+        ul {
+            font-size: 1.15em;
+        }
+
+        h3 {
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        p {
+            margin: 1.1em 0;
+        }
+    
+        @content;
+    }
+}

@@ -1,0 +1,91 @@
+$select: ".banner" !default;
+
+// config
+@use "../config/fonts";
+@use "../config/colors";
+@use "../config/queries";
+
+$color: colors.get(default-light);
+$background: colors.get(callout);
+
+@mixin base {
+    #{$select} {
+        
+        font-weight: 600;
+        display: inline-block;
+        font-style: normal;
+        color: $color;
+        background: $background;
+        line-height: 1;
+        text-align: center;
+        padding: 0.35em;
+        margin: 0.1em 0;
+        box-shadow: 0 0.4em 0.5em -0.4em rgb(0 0 0 / 60%);
+        text-shadow: none;
+        position: relative;
+        z-index: 2;
+
+        &__accent {
+            color: colors.get(accent-banner);
+        }
+
+        @content;
+    }
+}
+
+@mixin stacked {
+    #{$select}-stacked {
+        #{$select}+#{$select} {
+            z-index: 1;
+            margin: -0.15em 0 0 2.2em;
+        }
+        #{$select}__slant,
+        #{$select}__accent {
+            font-size: 1.25em;
+        }
+        #{$select}__slant {
+            padding: 0.25em 0.75em;
+        }
+
+        @content;
+    }
+}
+
+@mixin slant {
+    #{$select} {
+
+        padding: 0;
+
+        $slantLeft: 2%;
+        $slantRight: 100% - $slantLeft;
+        $clip-path: polygon(#{$slantLeft} 0, 100% 0, #{$slantRight} 100%, 0% 100%);
+        $clip-path-reverse: polygon(0 0, 100% 0, 100% 100%, 5% 100%);
+
+        &__slant {
+
+            display: block;
+            width: 100%;
+            font-weight: 700;
+            font-style: italic;
+            padding-left: 0.75em;
+            padding-right: 0.75em;
+            position: relative;
+            z-index: 2;
+            padding: 0.5em 1em;
+    
+            @content;
+        }
+
+        @supports (clip-path: $clip-path) {
+            background: none;
+            &__slant {
+                background: $background;
+                clip-path: $clip-path;
+                &--reverse {
+                    clip-path: $clip-path-reverse;
+                }
+            }
+        }
+
+    }
+}

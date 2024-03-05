@@ -1,0 +1,23 @@
+$select: ".review" !default;
+
+@mixin base {
+    #{$select} {
+        max-width: 75ch;
+
+        & + & {
+            margin-top: 2em;
+        }
+
+        figcaption {
+            font-weight: bold;
+            margin-top: 1em;
+        }
+
+        &__stars {
+            width: 10em;
+            height: 3em;
+        }
+
+        @content;
+    }
+}

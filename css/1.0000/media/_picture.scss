@@ -1,0 +1,93 @@
+@use "sass:math";
+
+// config
+@use "../config/queries";
+
+// media
+@use "../../../Shared/css/template/base/media/contain";
+
+@mixin base {
+    [data-src-img] {
+        @include contain.format;
+    }
+}
+
+@mixin file($filename) {
+    [data-src-img$="#{$filename}"] {
+        @content;
+    }
+}
+
+@mixin set-basis-by-ratio($width, $height) {
+    flex-basis: queries.em($width);
+
+    @include contain.ratio(math.div($width, $height));
+}
+
+@mixin landing-page {
+    @include file("/images/best-seller.png") {
+        @include contain.ratio(math.div(199, 246));
+    }
+
+    @include file("/images/serum.png") {
+        @include contain.ratio(math.div(75, 248));
+    }
+
+    @include file("/images/rick-langley.jpg") {
+        @include contain.ratio(math.div(420, 535));
+    }
+}
+
+@mixin index {
+    @include file("/images/kate-lifestyle.jpg") {
+        @include contain.ratio(math.div(303, 394));
+    }
+
+    @include file("/images/featured/people.png") {
+        @include set-basis-by-ratio(124, 64);
+    }
+
+    @include file("/images/featured/yahoo.png") {
+        @include set-basis-by-ratio(124, 64);
+    }
+
+    @include file("/images/featured/stylecaster.png") {
+        @include set-basis-by-ratio(230, 64);
+    }
+
+    @include file("/images/featured/hello.png") {
+        @include set-basis-by-ratio(140, 64);
+    }
+
+    @include file("/images/featured/e-online.png") {
+        @include set-basis-by-ratio(90, 64);
+    }
+
+    @include file("/images/featured/page-six.png") {
+        @include set-basis-by-ratio(64, 64);
+    }
+
+    @include file("/images/ingredients/acid.jpg") {
+        @include contain.ratio(math.div(250, 250));
+    }
+
+    @include file("/images/ingredients/ribbon.jpg") {
+        @include contain.ratio(math.div(250, 250));
+    }
+
+    @include file("/images/ingredients/collagen.jpg") {
+        @include contain.ratio(math.div(250, 250));
+    }
+
+    @include file("/images/ingredients/antioxidant.jpg") {
+        @include contain.ratio(math.div(250, 250));
+    }
+
+    @include file("/images/anti-aging-firming-serum-advert.jpg") {
+        @include contain.ratio(math.div(398, 503));
+    }
+
+    @include file("/images/30-day-mbg.svg") {
+        @include contain.ratio(math.div(182, 182));
+    }
+}

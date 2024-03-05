@@ -1,0 +1,15 @@
+$select: ".button-detail" !default;
+
+@mixin base {
+    #{$select} {
+        
+        display: block;
+        font-size: 0.85rem;
+        line-height: 1;
+        margin: 0.5em 0;
+        text-align: center;
+        max-width: 22rem;
+    
+        @content;
+    }
+}

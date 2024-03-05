@@ -1,0 +1,38 @@
+@use "sass:map";
+
+$select: ".color" !default;
+
+$list: (
+    default-light: white,
+    default-dark: black,
+    base: #010729,
+    base-light: #eeeeee,
+    base-dark: black,
+    primary: #010729,
+    primary-light: #001489,
+    complement: #dce6f7,
+    complement-light: #395789,
+    accent: #e4b394,
+    accent-light: #fff2ea,
+    accent-dark: #954a00,
+    placeholder: whitesmoke,
+    callout: #e34f4f,
+    legend: #636363
+);
+
+@function get($name) {
+    @return map.get($list, $name);
+}
+
+@mixin selectors {
+    #{$select} {
+        @each $name, $color in $list {
+            &-#{$name} {
+                color: $color;
+                font-weight: bold;
+            }
+        }
+
+        @content;
+    }
+}

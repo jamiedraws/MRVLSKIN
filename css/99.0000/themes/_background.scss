@@ -1,0 +1,26 @@
+$select: ".bg" !default;
+
+// config
+@use "../config/fonts";
+@use "../config/colors";
+
+// themes
+@use "../../../Shared/css/template/base/themes/background";
+
+@mixin base {
+    @include background.image;
+
+    #{$select} {
+        &--image &__image {
+            &::after {
+                display: none;
+            }
+
+            img {
+                height: 100%;
+            }
+        }
+
+        @content;
+    }
+}

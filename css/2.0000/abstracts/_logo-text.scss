@@ -1,0 +1,59 @@
+$select: ".logo-text" !default;
+
+// config
+@use "../config/fonts";
+@use "../config/colors";
+
+// abstracts
+@use "../../../Shared/css/template/base/abstracts/group";
+
+@mixin base {
+    #{$select} {
+        &__group {
+            @include group.contain(0.5em);
+            align-items: flex-end;
+            text-decoration: none;
+        }
+
+        &__text {
+            color: currentColor;
+            font-weight: 800;
+            font-size: fonts.em(25);
+            line-height: 0.4;
+        }
+
+        &__logo {
+            width: 13em;
+            height: 4em;
+        }
+
+        @content;
+    }
+
+    @include stack;
+}
+
+@mixin stack {
+    #{$select} {
+        &--stack {
+            text-align: center;
+
+            #{$select} {
+                &__group {
+                    flex-direction: column;
+                    align-items: center;
+                }
+
+                &__logo {
+                    max-width: 13em;
+                }
+
+                &__text {
+                    font-size: 0.8em;
+                }
+            }
+
+            @content;
+        }
+    }
+}

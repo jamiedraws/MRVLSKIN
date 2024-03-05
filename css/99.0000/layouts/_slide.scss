@@ -1,0 +1,100 @@
+$select: ".slide" !default;
+
+// config
+@use "../config/fonts";
+@use "../config/colors";
+@use "../config/queries";
+
+// layouts
+@use "../../../Shared/css/template/shoppingcart/layouts/slide" with
+    ($select: $select, $desktop: 1400px);
+
+@mixin base {
+    @include slide.new {
+        @media all and (min-width: slide.$desktop) {
+            &__nav {
+                color: colors.get(accent);
+            }
+
+            &__prev {
+                left: 1em;
+            }
+
+            &__next {
+                right: 1em;
+            }
+        }
+    }
+
+    #{$select} {
+        @content;
+    }
+}
+
+@mixin image-carousel {
+    #{$select} {
+        &--image-carousel {
+            @media all and (min-width: 1400px) {
+                @include slide.extend-buttons-outward(-1.5em);
+            }
+
+            @media all and (max-width: 1399px) {
+                @include slide.convert-nav-to-flow();
+            }
+
+            @content;
+        }
+    }
+}
+
+@mixin text-image-carousel {
+    #{$select} {
+        &--text-image-carousel {
+            @include slide.convert-nav-to-flow();
+
+            @content;
+        }
+    }
+}
+
+@mixin review {
+    #{$select} {
+        &--review {
+            #{$select} {
+                &__into {
+                    max-width: 46rem;
+                    margin: auto;
+                }
+
+                &__prev,
+                &__next {
+                    svg {
+                        color: colors.get(accent);
+                    }
+                }
+
+                @media all and (min-width: queries.get(section-max)) {
+                    &__nav {
+                        position: absolute;
+                        width: 90%;
+                    }
+    
+                    &__prev,
+                    &__next {
+                        position: absolute;
+                    }
+                    
+                    &__prev {
+                        left: 0;
+                    }
+                    
+                    &__next {
+                        right: 0;
+                    }
+                }
+            }
+
+            @content;
+        }
+    }
+}

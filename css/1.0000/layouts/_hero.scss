@@ -1,0 +1,161 @@
+$select: ".hero" !default;
+
+// config
+@use "../config/fonts";
+@use "../config/colors";
+@use "../config/queries";
+
+// abstracts
+@use "../../../Shared/css/template/base/abstracts/group";
+@use "../../../Shared/css/template/base/abstracts/copy";
+
+// themes
+@use "../../../Shared/css/template/base/themes/background";
+
+@mixin base {
+    #{$select} {
+        @include background.color-map(
+            $background-color: colors.get(complement),
+            $text-color: colors.get(primary)
+        );
+        text-shadow: 0 1px 1px white;
+
+        margin-bottom: 6em;
+
+        header {
+            @include copy.separate(1em);
+        }
+
+        &__in {
+            padding-bottom: 0;
+        }
+
+        &__bg {
+            object-position: top;
+        }
+
+        &__group {
+            @include group.contain;
+            align-items: center;
+            overflow: visible;
+        }
+
+        &__offer-price-payment {
+            flex: 1 1 25em;
+
+            font-size: 0.9em;
+            text-align: center;
+        }
+
+        &__offer-price {
+            margin: 1em auto;
+            font-size: fonts.em(25);
+            max-width: 18em;
+        }
+
+        &__order-payment {
+            @include copy.separate(1em);
+        }
+
+        &__payment {
+            font-size: 0.75em;
+        }
+
+        &__title {
+            font-weight: 400;
+            text-transform: uppercase;
+            font-size: fonts.em(34);
+            line-height: 1.2;
+
+            max-width: 15em;
+            margin: auto;
+        }
+
+        &__banner {
+            display: inline-block;
+            padding: 0.5em 1.5em;
+            border: 1px solid currentColor;
+
+            line-height: 1;
+            letter-spacing: 0.15em;
+            font-weight: 500;
+            font-size: fonts.em(20);
+
+            @include background.color-map(
+                $background-color: colors.get(accent-light),
+                $text-color: colors.get(primary)
+            );
+
+            > sup {
+                bottom: 0;
+                margin: 0;
+            }
+        }
+
+        &__product-celebrity {
+            flex: 0 1 37em;
+
+            position: relative;
+        }
+
+        &__product-celebrity > &__group {
+            flex-wrap: nowrap;
+        }
+
+        &__product {
+            margin-right: -7em;
+            margin-bottom: -7em;
+            z-index: 2;
+
+            max-width: queries.em(153);
+            width: 100%;
+        }
+
+        &__celebrity {
+            max-width: queries.em(532);
+            width: 100%;
+
+            position: relative;
+            z-index: 1;
+
+            > figcaption {
+                position: absolute;
+                right: 20em;
+                bottom: 9em;
+
+                font-size: fonts.em(16);
+                text-transform: uppercase;
+                text-align: right;
+                line-height: 1.1;
+
+                color: colors.get(complement-light);
+
+                max-width: 7em;
+            }
+        }
+
+        &__scorpion {
+            position: absolute;
+            z-index: 0;
+            top: 0;
+            right: 0;
+
+            opacity: 0.1;
+
+            width: 13em;
+            height: 21em;
+        }
+
+        @content;
+    }
+
+    @media all and (max-width: queries.set(640)) {
+        #{$select} {
+            font-size: 2.2vw;
+
+            &__offer-price-payment {
+                font-size: 1.25em;
+            }
+        }
+    }
+}

@@ -1,0 +1,74 @@
+@use "sass:math";
+
+// interfaces
+@use "app";
+@use "form";
+
+// layouts
+@use "../layouts/hero";
+@use "../layouts/content";
+@use "../layouts/slide";
+
+// components
+@use "../../../Shared/css/template/shoppingcart/components/list";
+@use "../../../Shared/css/template/base/components/accordion";
+@use "../components/offer";
+@use "../components/features-benefits";
+@use "../components/media-player";
+@use "../components/form-title";
+@use "../components/card";
+
+// abstracts
+@use "../abstracts/banner";
+@use "../abstracts/offer-group";
+@use "../abstracts/lifestyle";
+@use "../abstracts/callout-box";
+
+// media
+@use "../../../Shared/css/template/base/media/contain";
+
+// themes
+@use "../themes/background";
+
+// config
+@use "../config/colors";
+
+// abstracts
+@use "../abstracts/divider-line";
+
+@mixin index {
+    @include divider-line.base;
+    @include hero.base;
+    @include offer.base;
+    @include offer-group.base;
+    @include banner.base;
+    @include features-benefits.base;
+
+    @include background.base;
+    @include lifestyle.base;
+
+    @include media-player.base;
+
+    @include contain.new {
+        &--video {
+            @include contain.ratio(math.div(16, 9));
+            background: colors.get(placeholder);
+        }
+    }
+
+    @include slide.base;
+    @include slide.text-image-carousel;
+    @include slide.image-carousel;
+    @include slide.review;
+}
+
+@mixin landing-page {
+    @include form.checkout;
+    @include callout-box.base;
+
+    @include form-title.base;
+    @include list.stack;
+
+    @include accordion.base;
+    @include card.base;
+}

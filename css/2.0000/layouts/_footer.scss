@@ -1,0 +1,48 @@
+$select: ".footer" !default;
+
+// config
+@use "../config/fonts";
+@use "../config/colors";
+@use "../config/queries";
+
+// components
+@use "../../../Shared/css/template/base/components/list";
+
+// themes
+@use "../../../Shared/css/template/base/themes/background";
+
+@mixin base {
+    #{$select} {
+        overflow: hidden;
+
+        text-align: center;
+        font-size: fonts.em(14);
+
+        @include background.color-map(
+            colors.get(primary),
+            colors.get(default-light)
+        );
+
+        nav {
+            @include list.structure($offset: 0);
+
+            @media all and (max-width: queries.set(640)) {
+                @include list.convert-to-grid($width: 11em);
+            }
+
+            @media all and (min-width: queries.set(640)) {
+                @include list.inline;
+            }
+        }
+
+        &__logo {
+            display: inline-block;
+        }
+
+        a:not(:hover):not(:focus) {
+            text-decoration: none;
+        }
+
+        @content;
+    }
+}

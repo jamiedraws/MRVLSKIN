@@ -1,0 +1,78 @@
+@use "sass:math";
+
+// interfaces
+@use "app";
+@use "form";
+
+// layouts
+@use "../layouts/hero";
+@use "../layouts/content";
+@use "../layouts/slide";
+@use "../layouts/testimonials";
+
+// components
+@use "../../../Shared/css/template/shoppingcart/components/list";
+@use "../../../Shared/css/template/base/components/accordion";
+@use "../components/offer";
+@use "../components/media-player";
+@use "../components/form-title";
+@use "../components/card";
+@use "../components/review";
+
+// media
+@use "../../../Shared/css/template/base/media/contain";
+@use "../media/picture";
+
+// themes
+@use "../themes/background";
+
+// config
+@use "../config/colors";
+
+// abstracts
+@use "../abstracts/divider-line";
+
+@mixin index {
+    @include divider-line.base;
+    @include hero.base;
+    @include offer.base;
+
+    @include background.base;
+
+    @include media-player.base;
+
+    @include contain.new {
+        &--video {
+            @include contain.ratio(math.div(16, 9));
+            background: colors.get(base);
+        }
+    }
+
+    @include content.picture-media;
+    @include content.logo-gallery;
+    @include content.raised-header;
+    @include content.picture-text-focus;
+    @include content.clinical-trials;
+    @include content.text-photo-card;
+    @include content.seal-text;
+    @include content.ingredient;
+
+    @include testimonials.base;
+    @include slide.base;
+
+    @include picture.index;
+}
+
+@mixin landing-page {
+    @include form.checkout;
+
+    @include form-title.base;
+    @include list.stack;
+
+    @include accordion.base;
+    @include card.base;
+    @include review.base;
+
+    @include picture.base;
+    @include picture.landing-page;
+}

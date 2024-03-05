@@ -1,0 +1,61 @@
+$select: ".burst" !default;
+
+// config
+@use "../config/fonts";
+@use "../config/colors";
+
+// components
+@use "../../../Shared/css/template/shoppingcart/components/burst";
+
+// abstracts
+@use "../../../Shared/css/template/base/abstracts/group";
+
+@mixin set-color(
+    $background-color: colors.get(base),
+    $border-color: $background-color,
+    $text-color: currentColor
+) {
+    background: $background-color;
+    border-color: $border-color;
+    color: $text-color;
+}
+
+@mixin base {
+    @include burst.new;
+
+    #{$select} {
+        font-size: 1em;
+        @include set-color(
+            $background-color: transparent,
+            $border-color: currentColor
+        );
+
+        @content;
+    }
+
+    @include price;
+}
+
+@mixin price {
+    #{$select} {
+        &--price {
+            @include set-color(
+                colors.get(primary),
+                $text-color: colors.get(base-light)
+            );
+
+            @content;
+        }
+    }
+}
+
+@mixin center {
+    #{$select} {
+        &--center {
+            margin-left: auto;
+            margin-right: auto;
+
+            @include set-color(colors.get(accent));
+        }
+    }
+}

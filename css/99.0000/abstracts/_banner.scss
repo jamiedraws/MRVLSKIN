@@ -1,0 +1,23 @@
+$select: ".banner" !default;
+
+// config
+@use "../config/fonts";
+@use "../config/colors";
+
+@mixin base {
+    #{$select} {
+        font-size: fonts.rem(20);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.25em;
+        text-align: center;
+
+        display: block;
+        padding: 0.25em;
+        margin-bottom: 1em;
+        background: colors.get(primary);
+        color: colors.get(base-light);
+
+        @content;
+    }
+}

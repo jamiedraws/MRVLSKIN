@@ -1,0 +1,107 @@
+@use "sass:math";
+
+$select: ".before-after" !default;
+
+@use "../../../Shared/css/template/base/media/contain";
+@use "../config/fonts";
+@use "../config/colors";
+@use "../config/queries";
+
+@mixin base {
+    #{$select} {
+        
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        margin: 0 -0.5em;
+        font-family: fonts.get(secondary);
+
+        figcaption {
+            font-size: 1.2em;
+            font-weight: 600;
+        }
+
+        &__list {
+            padding: 0.8em;
+            text-align: center;
+            color: colors.get(primary);
+            flex: 0 1 13.1em;
+            font-weight: 600;
+            display: block;
+            margin: 0;
+            > * {
+                list-style: none;
+                position: relative;
+                margin: 1.33em 0;
+                &::before {
+                    content: "";
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    margin: 0.15em auto;
+                    background: colors.get(primary-alt);
+                    border-radius: 100%;
+                    padding: 0.15em;
+                    width: 1.5em;
+                    height: 1.5em;
+                }
+                &:nth-child(1)::before {
+                    content: "1";
+                }
+                &:nth-child(2)::before {
+                    content: "2";
+                }
+                &:nth-child(3)::before {
+                    content: "3";
+                }
+            }
+        }
+
+        &__item {
+            flex: 0 1 259px;
+            margin: 0 0.5em;
+            position: relative;
+            picture {
+                @include contain.ratio(math.div(259, 346));
+                position: relative;
+                z-index: 1;
+            }
+            figcaption {
+                background: white;
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                margin: 0;
+                padding: 0.25em 0.5em;
+                z-index: 2;
+            }
+        }
+
+        @media all and (max-width: queries.get(document-mobile-portrait)) {
+            &__item {
+                flex: 0 1 50%;
+                margin: 0;
+                padding: 0.5em;
+            }
+            &__list {
+                flex: 0 1 100%;
+                order: 2;
+                text-align: left;
+                margin: 0;
+                > * {
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+                    margin: 0.8em 0;
+                    &::before {
+                        margin: 0 1em 0 0;
+                    }
+                }
+            }
+        }
+    
+        @content;
+    }
+}

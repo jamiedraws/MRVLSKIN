@@ -1,0 +1,12 @@
+$select: ".divider-line" !default;
+
+// abstracts
+@use "../../../Shared/css/template/base/abstracts/divider-line";
+
+@mixin base {
+    @include divider-line.new;
+
+    #{$select} {
+        @content;
+    }
+}

@@ -1,0 +1,11 @@
+$select: ".features-benefits" !default;
+
+// config
+@use "../config/fonts";
+@use "../config/colors";
+
+@mixin base {
+    #{$select} {
+        @content;
+    }
+}

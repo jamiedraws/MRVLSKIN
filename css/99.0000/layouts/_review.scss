@@ -1,0 +1,36 @@
+$select: ".review" !default;
+
+// config
+@use "../config/fonts";
+@use "../config/colors";
+
+// abstracts
+@use "../../../Shared/css/template/base/abstracts/copy";
+
+@mixin base {
+    #{$select} {
+        text-align: center;
+
+        figure {
+            @include copy.separate;
+        }
+
+        figcaption {
+            font-weight: 700;
+        }
+
+        h2 {
+            margin-bottom: 1em;
+        }
+
+        &__avatar {
+            max-width: 10em;
+            margin: auto;
+            overflow: hidden;
+            border-radius: 100%;
+            background: colors.get(placeholder);
+        }
+
+        @content;
+    }
+}

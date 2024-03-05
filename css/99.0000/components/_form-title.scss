@@ -1,0 +1,31 @@
+$select: ".ft" !default;
+
+// config
+@use "../config/fonts";
+@use "../config/colors";
+@use "../config/queries";
+
+@mixin base {
+    #{$select} {
+        padding: 2em 1em;
+        background: colors.get(primary);
+        color: colors.get(base-light);
+        text-align: center;
+        font-size: 1.25em;
+        line-height: 1;
+
+        @media all and (max-width: queries.set(640)) {
+            font-size: 1em;
+        }
+
+        &__first {
+            text-transform: uppercase;
+            color: colors.get(accent);
+            font-weight: 800;
+            font-size: 1.55em;
+            margin-bottom: 0.25em;
+        }
+
+        @content;
+    }
+}

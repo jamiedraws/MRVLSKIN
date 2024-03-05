@@ -1,0 +1,104 @@
+@use "sass:math";
+
+$select: ".content" !default;
+
+// config
+@use "../config/fonts";
+@use "../config/colors";
+@use "../config/queries";
+
+// abstracts
+@use "../../../Shared/css/template/base/abstracts/group";
+@use "../../../Shared/css/template/base/abstracts/copy";
+
+// themes
+@use "../../../Shared/css/template/base/themes/background";
+
+// media
+@use "../../../Shared/css/template/base/media/contain";
+
+%title {
+    font-weight: 800;
+    line-height: 1.25;
+}
+
+%h2 {
+    font-size: fonts.rem(36);
+    text-transform: uppercase;
+}
+
+%h3 {
+    font-size: fonts.rem(28);
+}
+
+@mixin base {
+    #{$select} {
+        &__group {
+            @include group.contain(1em);
+            justify-content: center;
+            align-items: center;
+
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
+        h2,
+        h3,
+        &__header,
+        &__title {
+            @extend %title;
+        }
+
+        h2,
+        &__title {
+            @extend %h2;
+        }
+
+        h3,
+        &__header {
+            @extend %h3;
+        }
+
+        &__header {
+            color: colors.get(accent);
+        }
+
+        &__title {
+            color: colors.get(primary);
+        }
+
+        &__image {
+            box-sizing: content-box;
+        }
+
+        &__text {
+            @include copy.separate(1rem);
+        }
+
+        [data-src-img]:not([data-src-img$=".png"]),
+        [data-src-iframe] {
+            background: colors.get(placeholder);
+        }
+
+        @content;
+    }
+}
+
+@mixin primary-bg {
+    #{$select} {
+        &--primary-bg {
+            @include background.color-map(
+                $background-color: colors.get(primary),
+                $text-color: colors.get(default-light)
+            );
+
+            #{$select} {
+                &__title {
+                    color: colors.get(accent);
+                }
+            }
+
+            @content;
+        }
+    }
+}

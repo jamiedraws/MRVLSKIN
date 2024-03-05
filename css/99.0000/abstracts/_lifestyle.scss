@@ -1,0 +1,46 @@
+@use "sass:math";
+
+$select: ".lifestyle" !default;
+
+// config
+@use "../config/fonts";
+@use "../config/colors";
+@use "../config/queries";
+
+// abstracts
+@use "../../../Shared/css/template/base/abstracts/group";
+
+// media
+@use "../../../Shared/css/template/base/media/contain";
+
+@mixin base {
+    #{contain.$select} {
+        &--lifestyle {
+            @include contain.ratio(math.div(490, 313));
+        }
+    }
+
+    #{$select} {
+        overflow: hidden;
+
+        &__group {
+            @include group.contain;
+
+            @media all and (min-width: queries.set(493)) {
+                flex-wrap: nowrap;
+            }
+        }
+
+        picture {
+            background: colors.get(placeholder);
+        }
+
+        img {
+            // width: 100%;
+            // height: 100%;
+            // object-fit: cover;
+        }
+
+        @content;
+    }
+}

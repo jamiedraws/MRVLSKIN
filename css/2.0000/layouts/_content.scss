@@ -1,0 +1,608 @@
+@use "sass:math";
+@use "sass:color";
+
+$select: ".content" !default;
+
+// config
+@use "../config/fonts";
+@use "../config/colors";
+@use "../config/queries";
+
+// abstracts
+@use "../../../Shared/css/template/base/abstracts/group";
+@use "../../../Shared/css/template/base/abstracts/copy";
+@use "../../../Shared/css/template/base/abstracts/position";
+@use "../abstracts/first-letter-text";
+
+// themes
+@use "../../../Shared/css/template/base/themes/background";
+
+%title {
+    font-weight: 800;
+    line-height: 1;
+}
+
+%h2 {
+    font-size: fonts.em(50);
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+%h3 {
+    font-size: fonts.rem(28);
+}
+
+@mixin base {
+    #{$select} {
+        &__group {
+            @include group.contain(1em);
+            justify-content: center;
+            align-items: center;
+
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
+        h2,
+        h3,
+        &__title {
+            @extend %title;
+        }
+
+        h2,
+        &__title {
+            @extend %h2;
+        }
+
+        h3 {
+            @extend %h3;
+        }
+
+        &__header,
+        &__footer {
+            flex: 1 1 100%;
+            text-align: center;
+        }
+
+        &__header > &__title {
+            margin-bottom: 1.5rem;
+        }
+
+        &__title {
+            color: colors.get(primary);
+        }
+
+        &__image {
+            box-sizing: content-box;
+        }
+
+        &__text {
+            @include copy.separate(1em);
+        }
+
+        &__p {
+            font-size: 1.1em;
+            color: colors.get(primary);
+        }
+
+        &__link {
+            color: colors.get(primary);
+            font-family: fonts.get(secondary);
+
+            display: inline-block;
+        }
+
+        [data-src-img]:not([data-src-img$=".png"]):not([data-src-img$=".svg"]),
+        [data-src-iframe] {
+            background: colors.get(placeholder);
+        }
+
+        @content;
+    }
+
+    @include primary-bg;
+    @include base-light-bg;
+}
+
+@mixin picture-media {
+    #{$select} {
+        &--picture-media {
+            #{$select} {
+                &__group {
+                    align-items: stretch;
+                }
+
+                &__header {
+                    @include copy.separate(1rem);
+                }
+
+                &__title {
+                    @media all and (max-width: queries.set(600)) {
+                        max-width: 6em;
+                        margin-left: auto;
+                        margin-right: auto;
+                    }
+                }
+
+                &__picture {
+                    max-width: queries.em(303);
+                    position: relative;
+                }
+
+                &__media {
+                    flex-basis: queries.em(596);
+                    #{$select}__title {
+                        margin: 1em 0;
+                        text-align: center;
+                    }
+                }
+
+                &__quote {
+                    @include background.color-map(
+                        $background-color: colors.get(default-light),
+                        $text-color: colors.get(base)
+                    );
+                    border: 2px solid colors.get(primary);
+                    padding: 1em 0.5em;
+
+                    text-align: center;
+                    font: fonts.em(15) fonts.get(secondary);
+                }
+
+                &__figcaption {
+                    display: flex;
+                    justify-content: center;
+
+                    padding: 0.5em;
+
+                    letter-spacing: 1px;
+                    line-height: 1;
+                    font-weight: 400;
+                    font-size: fonts.em(20);
+
+                    background: linear-gradient(
+                        to left,
+                        #001489,
+                        #001489 38%,
+                        #001489 79%,
+                        #00022a 100%
+                    );
+
+                    small {
+                        display: block;
+                    }
+                }
+
+                @media all and (min-width: queries.set(460)) {
+                    &__figure {
+                        flex-basis: queries.em(430);
+                    }
+
+                    &__quote {
+                        width: 10em;
+
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        z-index: 1;
+                        transform: translate(80%, 60%);
+                    }
+
+                    &__figcaption {
+                        position: absolute;
+                        z-index: 1;
+                        bottom: 0;
+                        left: 0;
+                        right: 0;
+                    }
+                }
+            }
+
+            @content;
+        }
+    }
+}
+
+@mixin media-slider {
+    #{$select} {
+        &--media-slider {
+            
+            color: colors.get(primary);
+            text-align: center;
+            
+            #{$select} {
+                &__group {
+                    > * {
+                        flex: 0 1 100%;
+                    }
+                }
+
+                &__header {
+                    @include copy.separate(1rem);
+                }
+
+                &__title {
+                    text-transform: none;
+                }
+
+                &__caption {
+                    font-family: fonts.get(secondary);
+                    font-size: fonts.rem(20);
+                    font-weight: 600;
+                    margin: 1em 0;
+                }
+
+                &__slider {
+                    #{$select}__title {
+                        margin: 1em 0;
+                        text-align: center;
+                    }
+                }
+
+                &__picture {
+                    position: relative;
+                }
+
+            }
+
+            @content;
+        }
+    }
+}
+
+@mixin logo-gallery {
+    #{$select} {
+        &--logo-gallery {
+            #{$select} {
+                &__header {
+                    max-width: 20em;
+                    margin: auto;
+                }
+
+                &__title {
+                    padding: 0.5em;
+                    font-size: fonts.em(30);
+                    margin: 0;
+                }
+
+                &__group {
+                    @media all and (max-width: queries.set(1080)) {
+                        max-width: 41em;
+                        margin: auto;
+                    }
+                }
+            }
+
+            @content;
+        }
+    }
+}
+
+@mixin raised-header {
+    #{$select} {
+        &--raised-header {
+            #{$select} {
+                &__header {
+                    position: relative;
+                    background: white;
+                    max-width: 10em;
+                    margin: -1em auto auto;
+                    font-size: 3em;
+                    font-weight: normal;
+                    padding: 1.5rem;
+                }
+            }
+
+            @content;
+        }
+    }
+}
+
+@mixin ingredient {
+    #{$select} {
+        &--ingredient {
+            #{$select} {
+                &__picture {
+                    flex-basis: queries.em(250);
+                }
+
+                &__link {
+                    text-decoration: none;
+                    color: colors.get(primary-light);
+                }
+            }
+
+            @media all and (min-width: queries.set(1100)) {
+                &:nth-child(even) {
+                    #{$select} {
+                        &__picture {
+                            order: 1;
+                        }
+                    }
+                }
+
+                #{$select} {
+                    &__text {
+                        flex-basis: 48em;
+                    }
+                }
+            }
+
+            @content;
+        }
+    }
+}
+
+@mixin text {
+    #{$select} {
+        &--text {
+            font-family: fonts.get(secondary);
+            line-height: 1.75;
+
+            h1,
+            h2,
+            h3 {
+                font-family: fonts.get(primary);
+                font-weight: 400;
+                line-height: 1.2;
+
+                text-transform: capitalize;
+
+                color: colors.get(primary);
+            }
+
+            h2 {
+                font-size: fonts.em(35);
+            }
+
+            h3 {
+                font-size: fonts.em(25);
+            }
+
+            b {
+                font-weight: 600;
+            }
+
+            ol,
+            ul,
+            li {
+                @include copy.separate(1em);
+            }
+
+            #{$select} {
+                &__list-heading {
+                    $offset: 3.5rem;
+
+                    counter-reset: number;
+                    list-style: none;
+                    margin-left: #{$offset};
+
+                    > li {
+                        counter-increment: number;
+
+                        margin-top: 2em;
+
+                        &::before {
+                            content: counter(number) ".";
+
+                            font-size: fonts.em(35);
+                            line-height: 1;
+                            color: colors.get(primary);
+
+                            display: block;
+                            margin-bottom: calc(-#{queries.em(35)} / 2);
+                            margin-left: -#{$offset};
+                        }
+                    }
+                }
+            }
+
+            @content;
+        }
+    }
+}
+
+@mixin picture-text-focus {
+    #{$select} {
+        &--picture-text-focus {
+            text-align: center;
+
+            p {
+                font-size: fonts.em(18);
+            }
+
+            #{$select} {
+                &__card {
+                    position: relative;
+                    padding: 3em 1em 4em;
+                    max-width: 43em;
+                    margin: auto;
+
+                    &::before {
+                        content: "";
+                        @include position.center-absolute;
+                        background: color.adjust(
+                            colors.get(primary),
+                            $alpha: -0.4
+                        );
+                        mix-blend-mode: multiply;
+                    }
+                }
+
+                &__header,
+                &__text {
+                    position: relative;
+                }
+
+                &__text {
+                    max-width: 30em;
+                    margin: 2rem auto auto;
+
+                    > p:last-child {
+                        max-width: 23em;
+                        margin-left: auto;
+                        margin-right: auto;
+                    }
+                }
+
+                &__title {
+                    font-size: fonts.em(33);
+                    letter-spacing: 0.2em;
+                    color: currentColor;
+
+                    margin: 0;
+
+                    + p {
+                        margin-top: 2rem;
+                    }
+                }
+            }
+
+            @content;
+        }
+    }
+}
+
+@mixin seal-text {
+    #{$select} {
+        &--seal-text {
+            p {
+                font-size: fonts.em(18);
+                font-family: fonts.get(secondary);
+                max-width: 39em;
+            }
+
+            #{$select} {
+                &__seal {
+                    flex-basis: queries.set(182);
+                }
+
+                &__text {
+                    flex-basis: 47em;
+                }
+
+                &__title {
+                    color: currentColor;
+                    font-size: fonts.em(30);
+                    font-weight: 400;
+                }
+            }
+
+            @content;
+        }
+    }
+}
+
+@mixin clinical-trials {
+    @include first-letter-text.base;
+
+    #{$select} {
+        &--clinical-trials {
+            #{$select} {
+                &__header {
+                }
+
+                &__picture {
+                    flex-basis: queries.em(398);
+                }
+
+                &__text {
+                    flex-basis: 30em;
+
+                    @include copy.separate(0.75em);
+
+                    > h3:not(:first-child) {
+                        margin-top: 1.75em;
+                    }
+                }
+
+                &__footer {
+                }
+            }
+
+            @content;
+        }
+    }
+}
+
+@mixin text-photo-card {
+    #{$select} {
+        &--text-photo-card {
+            p {
+                font-size: fonts.em(15);
+            }
+
+            #{$select} {
+                &__card {
+                    @include background.color-map(
+                        $background-color: colors.get(base-light),
+                        $text-color: colors.get(base)
+                    );
+                }
+
+                &__group {
+                    align-items: center;
+
+                    @media all and (min-width: queries.set(960)) {
+                        justify-content: space-between;
+                    }
+                }
+
+                &__text {
+                    margin: auto;
+
+                    @media all and (min-width: queries.set(960)) {
+                        flex-basis: 30em;
+                    }
+                }
+
+                &__title {
+                    font-size: fonts.em(30);
+                    font-weight: 400;
+                    line-height: 1;
+                    color: colors.get(primary);
+                    max-width: 10em;
+                }
+
+                &__photo {
+                    flex-basis: queries.set(420);
+                    margin: 0;
+                }
+            }
+
+            @content;
+        }
+    }
+}
+
+@mixin primary-bg {
+    #{$select} {
+        &--primary-bg {
+            @include background.color-map(
+                $background-color: colors.get(primary),
+                $text-color: colors.get(default-light)
+            );
+
+            #{$select} {
+                &__title {
+                    color: colors.get(accent);
+                }
+            }
+
+            @content;
+        }
+    }
+}
+
+@mixin base-light-bg {
+    #{$select} {
+        &--base-light-bg {
+            @include background.color-map(
+                $background-color: colors.get(base-light),
+                $text-color: colors.get(primary)
+            );
+
+            @content;
+        }
+    }
+}

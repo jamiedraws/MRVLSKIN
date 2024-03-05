@@ -1,0 +1,91 @@
+$select: ".slide" !default;
+
+// config
+@use "../config/fonts";
+@use "../config/colors";
+@use "../config/queries";
+
+// layouts
+@use "../../../Shared/css/template/shoppingcart/layouts/slide" with
+    ($select: $select, $desktop: 1400px);
+
+@mixin base {
+    @include slide.new {
+        &__nav {
+            color: colors.get(default-light);
+            max-height: 5em;
+
+            button {
+                background-color: colors.get(primary-light);
+                border: 1px solid #fff;
+            }
+
+            svg {
+                width: 0.6em;
+                height: 1em;
+                stroke: currentColor;
+                fill-rule: evenodd;
+                clip-rule: evenodd;
+                stroke-linecap: square;
+                stroke-linejoin: round;
+                stroke-miterlimit: 3;
+                stroke-width: 0.01em;
+                font-size: 0.7em;
+            }
+        }
+
+        @media all and (min-width: slide.$desktop) {
+            &__nav {
+                align-items: center;
+                width: 100%;
+                max-width: 65em;
+
+                button {
+                    height: auto;
+                    width: auto;
+                    padding: 0.1em;
+                }
+            }
+
+            &__prev {
+                left: 1em;
+            }
+
+            &__next {
+                right: 1em;
+            }
+        }
+
+        @media all and (max-width: slide.$desktop) {
+            &__nav {
+                font-size: 0.75em;
+
+                button {
+                    margin: 0 0.1em;
+                    padding: 0.05em 0.8em;
+                }
+            }
+        }
+    }
+
+    #{$select} {
+        @content;
+    }
+
+    @include testimonials;
+}
+
+@mixin testimonials {
+    #{$select} {
+        &--testimonials {
+            #{$select} {
+                &__into {
+                    max-width: 40em;
+                    margin: auto;
+                }
+            }
+
+            @content;
+        }
+    }
+}
